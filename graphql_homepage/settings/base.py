@@ -39,6 +39,12 @@ MIDDLEWARE = [
 
 X_FRAME_OPTIONS = 'SAMEORIGIN'
 
+MDEDITOR_CONFIGS = {
+    'default': {
+        'language': 'en',
+    }
+}
+
 CORS_ORIGINE_WHITELIST = [
     "http://localhost:3000"
 ]

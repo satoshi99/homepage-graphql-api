@@ -28,7 +28,13 @@ class TokyoDateTime(graphene.types.Scalar):
 class Markdown(graphene.types.Scalar):
     @staticmethod
     def serialize(obj):
-        return markdown.markdown(obj, extensions=['markdown.extensions.fenced_code', 'toc'])
+        return markdown.markdown(
+            obj,
+            extensions=[
+                'markdown.extensions.fenced_code',
+                'toc',
+                'tables',
+            ])
 
 
 class TagNode(DjangoObjectType):
