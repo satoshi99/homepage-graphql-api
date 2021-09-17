@@ -52,7 +52,8 @@ class BlogNode(DjangoObjectType):
         filter_fields = {
             'title': ['icontains'],
             'content': ['icontains'],
-            'tags__name': ['exact'],
+            'tags__name': ['exact', 'icontains'],
+            'published_at': ['gte', 'lte'],
             'is_public': ['exact'],
         }
         interfaces = (relay.Node,)
