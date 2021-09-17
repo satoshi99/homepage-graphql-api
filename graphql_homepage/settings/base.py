@@ -42,6 +42,7 @@ X_FRAME_OPTIONS = 'SAMEORIGIN'
 MDEDITOR_CONFIGS = {
     'default': {
         'language': 'en',
+        'image_folder': '',
     }
 }
 
