@@ -7,6 +7,7 @@ from graphene_django.filter import DjangoFilterConnectionField
 import pytz
 from .models import Tag, Blog
 import markdown
+from django_filters import FilterSet, DateTimeFromToRangeFilter
 
 
 class UserNode(DjangoObjectType):
@@ -53,7 +54,6 @@ class BlogNode(DjangoObjectType):
             'title': ['icontains'],
             'content': ['icontains'],
             'tags__name': ['exact', 'icontains'],
-            'published_at': ['gte', 'lte'],
             'is_public': ['exact'],
         }
         interfaces = (relay.Node,)
