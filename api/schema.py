@@ -7,7 +7,7 @@ from graphene_django.filter import DjangoFilterConnectionField
 import pytz
 from .models import Tag, Blog
 import markdown
-from django_filters import FilterSet, DateTimeFromToRangeFilter
+from graphql_relay import from_global_id
 
 
 class UserNode(DjangoObjectType):
@@ -68,11 +68,21 @@ class BlogNode(DjangoObjectType):
 
 
 class Query(graphene.ObjectType):
-    login_user = graphene.Field(UserNode)
-    tag = relay.Node.Field(TagNode)
-    blog = relay.Node.Field(BlogNode)
+    blog = graphene.Field(BlogNode, id=graphene.NonNull(graphene.ID))
     all_tags = DjangoFilterConnectionField(TagNode)
     all_blogs = DjangoFilterConnectionField(BlogNode)
+    login_user = graphene.Field(UserNode)
+
+    def resolve_blog(self, info, **kwargs):
+        id = kwargs.get('id')
+        if id is not None:
+            return Blog.objects.get(id=from_global_id(id)[1])
+
+    def resolve_all_tags(self, info, **kwargs):
+        return Tag.objects.all()
+
+    def resolve_all_blogs(self, info, **kwargs):
+        return Blog.objects.all()
 
     @login_required
     def resolve_login_user(self, info, **kwargs):
