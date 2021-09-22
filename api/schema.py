@@ -54,6 +54,7 @@ class BlogNode(DjangoObjectType):
             'title': ['icontains'],
             'content': ['icontains'],
             'tags__name': ['exact', 'icontains'],
+            'tags__slug': ['exact'],
             'is_public': ['exact'],
         }
         interfaces = (relay.Node,)
