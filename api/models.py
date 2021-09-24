@@ -4,7 +4,7 @@ from mdeditor.fields import MDTextField
 
 
 class Tag(models.Model):
-    name = models.CharField(max_length=20)
+    name = models.CharField(max_length=50)
     slug = models.SlugField(unique=True)
 
     def __str__(self):
