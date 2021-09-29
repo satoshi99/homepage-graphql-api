@@ -43,6 +43,7 @@ class TagNode(DjangoObjectType):
         model = Tag
         filter_fields = {
             'name': ['icontains'],
+            'slug': ['exact'],
         }
         interfaces = (relay.Node,)
 
